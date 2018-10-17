@@ -55,6 +55,10 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Fprintf(w, "For %s %s\n", r.Host, r.URL.Path)
 
+	for _, cookie := range r.Cookies() {
+        fmt.Fprint(w, cookie.Name)
+    }
+
 	// add info from HELLO_ environment variables
 	for _, e := range os.Environ() {
 		if strings.HasPrefix(e, "HELLO_") {
